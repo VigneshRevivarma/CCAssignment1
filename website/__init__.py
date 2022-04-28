@@ -3,17 +3,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+from flask_share import Share
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
 
 def create_app():
     application=app = Flask(__name__)
     app.config['SECRET_KEY'] = 'batman'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:password@database-1.czw5ppll5s2k.us-east-1.rds.amazonaws.com:3306/db'
     db.init_app(app)
 
-    
+    share = Share(app)
 
     from .views import views
     from .auth import auth
@@ -36,6 +36,5 @@ def create_app():
     return app
 
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')

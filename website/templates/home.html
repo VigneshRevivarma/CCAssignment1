@@ -15,7 +15,11 @@
   <textarea name="note" id="note" class="form-control"></textarea>
   <br />
   <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
+    {{ share.load() }}
+    {{ share.create(title='Share with: ') }}
+  </div>
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Booking</button>
   </div>
 </form>
 {% endblock %}
